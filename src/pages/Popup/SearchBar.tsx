@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { TextField, IconButton, CircularProgress } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 interface SearchBarProps {
   search: (searchTerm: string) => Promise<any>;
@@ -23,18 +25,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ search }) => {
 
   return (
     <form onSubmit={handleSearch}>
-      <input
+      <TextField
         type="text"
+        size="small"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? (
-          <span>Spinner</span> // Replace this with your spinner component or element
-        ) : (
-          <span>Search Icon</span> // Replace this with your search icon
-        )}
-      </button>
+      &nbsp;
+      <IconButton size="small" type="submit" disabled={isLoading}>
+        {isLoading ? <CircularProgress size={20} /> : <SearchIcon />}
+      </IconButton>
     </form>
   );
 };
